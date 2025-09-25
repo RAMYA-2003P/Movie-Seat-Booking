@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Movie Seat Booking</title>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- LEFT SIDE: Movie List -->
+      <div class="movies-list">
+        <h2>🎬 Select a Movie</h2>
+
+        <div class="movie-card" data-price="220" data-rating="8.1" data-name="Titan">
+          <div>
+            <img src="titan.jpg" alt="Titan">
+          </div>
+          <div class="info">
+            <h3>Titan</h3>
+            <p>💰 RS.220</p>
+            <p>⭐ 8.1</p>
+          </div>
+        </div>
+
+        <div class="movie-card" data-price="320" data-rating="6.5" data-name="Lio">
+          <div>
+            <img src="lio.jpg" alt="Lio">
+          </div>
+          <div class="info">
+            <h3>Lio</h3>
+            <p>💰 RS.320</p>
+            <p>⭐ 6.5</p>
+          </div>
+        </div>
+
+        <div class="movie-card" data-price="250" data-rating="9.0" data-name="Animal">
+          <div>
+            <img src="animal.jpg" alt="Animal">
+          </div>
+          <div class="info">
+            <h3>Animal</h3>
+            <p>💰 RS.250</p>
+            <p>⭐ 9.0</p>
+          </div>
+        </div>
+
+        <div class="movie-card" data-price="260" data-rating="7.2" data-name="Avengers">
+          <div>
+            <img src="averangers.jpg" alt="Avengers">
+          </div>
+          <div class="info">
+            <h3>Avengers</h3>
+            <p>💰 RS.260</p>
+            <p>⭐ 7.2</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: Seat Booking -->
+      <div class="booking-container">
+        <h2 id="selectedMovie">Choose a movie</h2>
+        <p class="movie-details">
+          💰 Price: RS.<span id="selectedPrice">0</span> | ⭐ Rating: <span id="selectedRating">-</span>
+        </p>
+
+        <!-- Date & Time Selection -->
+        <div class="datetime-section">
+          <label for="showDate">📅 Select Date:</label>
+          <input type="date" id="showDate">
+
+          <label for="showTime">⏰ Select Time:</label>
+          <select id="showTime">
+            <option value="">--Choose Time--</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="4:00 PM">4:00 PM</option>
+            <option value="7:00 PM">7:00 PM</option>
+            <option value="10:00 PM">10:00 PM</option>
+          </select>
+        </div>
+
+        <ul class="showcase">
+          <li><div class="seat"></div><small>Available</small></li>
+          <li><div class="seat selected"></div><small>Selected</small></li>
+          <li><div class="seat sold"></div><small>Sold</small></li>
+        </ul>
+
+        <div class="container">
+          <div class="screen"></div>
+
+          <!-- ROWS WITH NAMES -->
+          <div class="row" data-row="A">
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+          </div>
+
+          <div class="row" data-row="B">
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat sold"></div><div class="seat"></div><div class="seat"></div>
+            <div class="seat sold"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+          </div>
+
+          <div class="row" data-row="C">
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat sold"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+          </div>
+
+          <div class="row" data-row="D">
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat sold"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+            <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+          </div>
+        </div>
+        
+        <p class="text">
+          You have selected <span id="count">0</span> seat(s): 
+          <span id="seatList">None</span><br>
+          Total Price: RS.<span id="total">0</span>
+        </p>
+
+        <button id="bookBtn">🎟️ Book Now</button>
+      </div>
+    </div>
+
+    <!-- Ticket Popup -->
+    <div id="ticketPopup" class="popup">
+      <div class="popup-content" id="ticketContent">
+        <h2>🎟️ Your Ticket</h2>
+        <p><strong>Movie:</strong> <span id="ticketMovie"></span></p>
+        <p><strong>Seats:</strong> <span id="ticketSeats"></span></p>
+        <p><strong>Total Price:</strong> RS.<span id="ticketTotal"></span></p>
+        <p><strong>Rating:</strong> ⭐<span id="ticketRating"></span></p>
+        <p><strong>Show Date:</strong> <span id="ticketShowDate"></span></p>
+        <p><strong>Show Time:</strong> <span id="ticketShowTime"></span></p>
+        <p><strong>Booked On:</strong> <span id="ticketDate"></span></p>
+        <p><strong>Token ID:</strong> <span id="ticketId"></span></p>
+
+        <button id="printTicket">🖨️ Print / Save</button>
+        <button id="downloadPDF">⬇️ Download PDF</button>
+        <button id="closePopup">Close</button>
+      </div>
+    </div>
+
+    <!-- jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
